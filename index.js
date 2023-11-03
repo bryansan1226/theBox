@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 const saltRounds = 10;
+const path = require("path");
 
 const app = express();
 
@@ -455,9 +456,6 @@ const getFollowing = async (req, res) => {
   }
 };
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
 app.get("/users", getAllUsers);
 app.post("/api/createAccount", createAccount);
 //If verifyToken encounters an error(e.g. it is unable to verify the user information) getUser will not run
@@ -485,7 +483,10 @@ app.delete("/api/unfollow", unfollow);
 app.get("/api/following/:user_id/:follower_id", following);
 app.get("/api/getFollowing/:follower_id", getFollowing);
 app.post("/api/newMessage", newMessage);
-
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
 app.listen(PORT, () => {
   console.log(`Server listening on the port  ${PORT}`);
+  console.log(path.join(__dirname, "client/build", "index.html"));
 });
