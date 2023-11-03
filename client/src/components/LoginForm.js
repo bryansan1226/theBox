@@ -10,6 +10,7 @@ import NewAccountForm from "./NewAccountForm";
 import Backdrop from "@mui/material/Backdrop";
 import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import backendUrl from "../config";
 function LoginForm() {
   //declaring variables to handle user input and allow navigating within the app using navigate
   const [username, setUsername] = useState("");
@@ -26,10 +27,14 @@ function LoginForm() {
     setPassword(inputValue);
   };
   const handleLogin = async () => {
+    console.log(backendUrl);
     try {
       /*Makes an API call to the backend with the provided username and password. 
       If the API returns a token, it will be set in localstorage and the user will be navigated to the homepage*/
-      const response = await axios.post("/api/login", { username, password });
+      const response = await axios.post(`${backendUrl}api/login`, {
+        username,
+        password,
+      });
       const token = response.data.token;
       localStorage.setItem("token", token);
 
