@@ -483,7 +483,8 @@ app.delete("/api/unfollow", unfollow);
 app.get("/api/following/:user_id/:follower_id", following);
 app.get("/api/getFollowing/:follower_id", getFollowing);
 app.post("/api/newMessage", newMessage);
-app.get("/*", (req, res) => {
+app.use(express.static(path.join(__dirname, "client/build")));
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 app.listen(PORT, () => {
