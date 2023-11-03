@@ -1,3 +1,5 @@
 const backendUrl =
-  process.env.REACT_APP_BACKEND_URL || "http://localhost:8080/";
+  process.env.NODE_ENV === "production"
+    ? `https://the-box-social-media-bryansan26.herokuapp.com`
+    : "http://localhost:8080/";
 export default backendUrl;
