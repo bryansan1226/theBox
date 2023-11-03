@@ -3,7 +3,6 @@ import backendUrl from "../config";
 import axios from "axios";
 import { useEffect } from "react";
 import Post from "./Post";
-import { CardContent } from "@mui/material";
 import NewPostForm from "./NewPostForm";
 import Typography from "@mui/material/Typography";
 

@@ -1,7 +1,4 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import Backdrop from "@mui/material/Backdrop";
-import NewAccountForm from "../components/NewAccountForm";
 import LoginForm from "../components/LoginForm";
 import Container from "@mui/material/Container";
 

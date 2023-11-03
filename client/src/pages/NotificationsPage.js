@@ -10,7 +10,6 @@ import backendUrl from "../config";
 function NotificationsPage() {
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
-  const searchQuery = queryParams.get("searchQuery");
   const userInfo = queryParams.get("userInfo");
   const [notifications, setNotifications] = useState([]);
   console.log(userInfo);

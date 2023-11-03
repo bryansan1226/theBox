@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  Typography,
-  CardActions,
-  Button,
-} from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import axios from "axios";
 import backendUrl from "../config";
 import { useEffect } from "react";

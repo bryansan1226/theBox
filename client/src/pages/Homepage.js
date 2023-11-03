@@ -2,8 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import backendUrl from "../config";
 import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
-import NewPostForm from "../components/NewPostForm";
 import PostFeed from "../components/PostFeed";
 import AppBar from "../components/AppBar";
 import Typography from "@mui/material/Typography";

@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import AppBar from "../components/AppBar";
-import App from "../App";
 import axios from "axios";
 import backendUrl from "../config";
 import { useEffect, useRef } from "react";
