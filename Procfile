@@ -1,2 +1,2 @@
 web: node index.js
-client: cd client && serve -s build
+client: cd client && npm start
