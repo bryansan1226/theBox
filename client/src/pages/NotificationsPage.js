@@ -2,7 +2,7 @@ import { Typography, Container } from "@mui/material";
 import AppBar from "../components/AppBar";
 import Notifications from "../components/Notifications";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import backendUrl from "../config";

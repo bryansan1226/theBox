@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import AppBar from "../components/AppBar";
 import axios from "axios";
 import backendUrl from "../config";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";

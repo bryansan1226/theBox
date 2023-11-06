@@ -5,6 +5,7 @@ import SearchResults from "./pages/SearchResults";
 import Messages from "./pages/Messages";
 import Conversation from "./pages/Conversation";
 import NotificationsPage from "./pages/NotificationsPage";
+import React from "react";
 
 function App() {
   return (

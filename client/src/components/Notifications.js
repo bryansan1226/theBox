@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import axios from "axios";
 import backendUrl from "../config";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 function Notifications(props) {
   const setNotificationsAsRead = async () => {
