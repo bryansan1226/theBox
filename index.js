@@ -489,5 +489,5 @@ app.get("/", (req, res) => {
 });
 app.listen(PORT, () => {
   console.log(`Server listening on the port  ${PORT}`);
-  console.log(path.join(__dirname, "client/build", "index.html"));
+  //console.log(path.join(__dirname, "client/build", "index.html"));
 });
