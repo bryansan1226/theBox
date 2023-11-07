@@ -52,7 +52,7 @@ const getAllUsers = (req, res) => {
 };
 const findUserByUsername = async (username) => {
   try {
-    const query = "SELECT * FROM users WHERE username = $1";
+    const query = "SELECT * FROM users WHERE username ILIKE $1";
     const values = [username];
     const { rows } = await pool.query(query, values);
     return rows[0]; // Return the first user found (assuming username is unique)
@@ -100,9 +100,10 @@ const login = async (req, res) => {
   const { username, password } = req.body;
   //Queries the database using the username to locate the user
   try {
-    const query = await pool.query("SELECT * FROM users WHERE username = $1", [
-      username,
-    ]);
+    const query = await pool.query(
+      "SELECT * FROM users WHERE username ILIKE $1",
+      [username]
+    );
     //Sets the user using the query result, should be the first and only result assuming no duplicate usernames
     const user = query.rows[0];
     if (!user) {
@@ -126,10 +127,10 @@ const login = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     //For testing purposes
-    console.log(
+    /*console.log(
       "When calling findbyusername, you're passing:",
       req.user.username
-    );
+    );*/
     //Retrieves username from the request and then calls a function to query the database.
     const username = req.user.username;
     //If the username is found, retrieves user information and attaches it to 'user'
@@ -264,7 +265,7 @@ const getFollowingPosts = async (req, res) => {
   try {
     const query = `SELECT *
     FROM posts
-    RIGHT JOIN followers ON posts.user_id = followers.user_id
+    LEFT JOIN followers ON posts.user_id = followers.user_id
     WHERE followers.follower_user_id = $1`;
     const user_id = req.params.user_id;
     const result = await pool.query(query, [user_id]);

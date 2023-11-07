@@ -44,12 +44,13 @@ const Search = styled("div")(({ theme }) => ({
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
-  position: "absolute",
+  position: "relative",
   pointerEvents: "none",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  right: 0,
+  right: 20,
+  cursor: "pointer",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -62,7 +63,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "50vw",
+    },
+    [theme.breakpoints.up("xs")]: {
+      width: "15vw",
     },
   },
 }));
@@ -288,21 +292,18 @@ export default function PrimarySearchAppBar(props) {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            {/*<MenuIcon />*/}
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: { xs: "block", sm: "block" }, cursor: "pointer" }}
+              onClick={handleLogoClick}
+            >
+              The Box
+            </Typography>
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" }, cursor: "pointer" }}
-            onClick={handleLogoClick}
-          >
-            The Box
-          </Typography>
+
           <Search>
-            <SearchIconWrapper onClick={handleSearch}>
-              <SearchIcon onClick={handleSearch} />
-            </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
@@ -310,6 +311,11 @@ export default function PrimarySearchAppBar(props) {
               onKeyDown={handleEnterKeyPress}
             />
           </Search>
+          <IconButton onClick={handleSearch}>
+            <SearchIconWrapper>
+              <SearchIcon onClick={handleSearch} />
+            </SearchIconWrapper>
+          </IconButton>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton

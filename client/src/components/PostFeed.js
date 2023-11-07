@@ -53,9 +53,13 @@ function PostFeed(props) {
         Feed:
       </Typography>
       <div>
-        {posts.map((content, index) => (
-          <Post key={index} content={content} userInfo={props.userInfo} />
-        ))}
+        {posts.length ? (
+          posts.map((content, index) => (
+            <Post key={index} content={content} userInfo={props.userInfo} />
+          ))
+        ) : (
+          <Typography>You have no posts to view</Typography>
+        )}
       </div>
     </>
   );
