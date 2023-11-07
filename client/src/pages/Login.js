@@ -4,13 +4,6 @@ import Container from "@mui/material/Container";
 
 //The login function is used to open or close the NewAccountForm component
 function Login() {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
   return (
     <>
       <Container

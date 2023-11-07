@@ -8,6 +8,7 @@ import NotificationsPage from "./pages/NotificationsPage";
 import React from "react";
 
 function App() {
+  console.log("In app.js");
   return (
     <BrowserRouter>
       <Routes>

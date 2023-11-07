@@ -27,7 +27,7 @@ function LoginForm() {
     setPassword(inputValue);
   };
   const handleLogin = async () => {
-    console.log(backendUrl);
+    //console.log(backendUrl);
     try {
       /*Makes an API call to the backend with the provided username and password. 
       If the API returns a token, it will be set in localstorage and the user will be navigated to the homepage*/
