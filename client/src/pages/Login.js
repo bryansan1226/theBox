@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 
 //The login function is used to open or close the NewAccountForm component
 function Login() {
+  console.log("In login.js");
   return (
     <>
       <Container

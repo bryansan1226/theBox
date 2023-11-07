@@ -17,7 +17,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-
+  console.log("In loginForm.js");
   const handleUsername = (event) => {
     const inputValue = event.target.value;
     setUsername(inputValue);
