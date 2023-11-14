@@ -90,6 +90,12 @@ function LoginForm() {
             onKeyDown={handleEnterKeyPress}
             sx={{ marginTop: "8px" }}
           />
+          <Typography>
+            For a demo, use credentials
+            <br />
+            username:testuser <br />
+            password:password
+          </Typography>
         </CardContent>
         <CardActions>
           <Button variant="contained" size="small" onClick={handleLogin}>
@@ -99,6 +105,7 @@ function LoginForm() {
             Create new account
           </Button>
         </CardActions>
+
         {/*The backdrop will also render the NewAccount component when opened and passes the handleClose
         function so it can be closed from within the component */}
         <Backdrop
