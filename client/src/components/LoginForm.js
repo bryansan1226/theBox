@@ -16,8 +16,8 @@ function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
+  const [failed, setFailed] = useState(false);
   const navigate = useNavigate();
-  console.log("In loginForm.js");
   const handleUsername = (event) => {
     const inputValue = event.target.value;
     setUsername(inputValue);
@@ -41,6 +41,7 @@ function LoginForm() {
       navigate("/home");
     } catch (error) {
       console.error(error.response?.data?.error || "Error during login");
+      setFailed(true);
     }
   };
   const handleEnterKeyPress = (e) => {
@@ -75,21 +76,46 @@ function LoginForm() {
           <Typography variant="h3" gutterBottom>
             The Box
           </Typography>
-          <TextField
-            id="username"
-            onChange={handleUsername}
-            onKeyDown={handleEnterKeyPress}
-            label="Username"
-            sx={{ margin: "8px" }}
-          />
-          <TextField
-            id="password"
-            type="password"
-            onChange={handlePassword}
-            label="Password"
-            onKeyDown={handleEnterKeyPress}
-            sx={{ marginTop: "8px" }}
-          />
+          {failed ? (
+            <>
+              <TextField
+                error
+                id="username"
+                onChange={handleUsername}
+                onKeyDown={handleEnterKeyPress}
+                label="Username"
+                sx={{ margin: "8px", width: "90%", maxWidth: "90%" }}
+              />
+              <TextField
+                error
+                id="password"
+                type="password"
+                onChange={handlePassword}
+                label="Password"
+                onKeyDown={handleEnterKeyPress}
+                helperText="Incorrect username or password"
+                sx={{ marginTop: "8px", width: "90%", maxWidth: "90%" }}
+              />
+            </>
+          ) : (
+            <>
+              <TextField
+                id="username"
+                onChange={handleUsername}
+                onKeyDown={handleEnterKeyPress}
+                label="Username"
+                sx={{ margin: "8px", width: "90%", maxWidth: "90%" }}
+              />
+              <TextField
+                id="password"
+                type="password"
+                onChange={handlePassword}
+                label="Password"
+                onKeyDown={handleEnterKeyPress}
+                sx={{ marginTop: "8px", width: "90%", maxWidth: "90%" }}
+              />
+            </>
+          )}
           <Typography>
             For a demo, use credentials
             <br />

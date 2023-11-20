@@ -23,43 +23,55 @@ function Post(props) {
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
   const [liked, isLiked] = useState(false);
+  const [commentEmpty, setCommentEmpty] = useState(false);
 
   const handleCommentText = (event) => {
     const inputValue = event.target.value;
     setCommentText(inputValue);
   };
+  const handleEnterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleNewComment();
+    }
+  };
   const handleNewComment = async () => {
-    const currentTimestamp = new Date().toISOString();
-    axios
-      .post(`${backendUrl}api/newComment`, {
-        post_id: props.content.post_id,
-        user_id: props.userInfo.user_id,
-        content: commentText,
-        created_at: currentTimestamp,
-      })
-      .then((response) => {
-        const { message } = response.data;
-        console.log("Response from server:", message);
-        setCommentText("");
-      })
-      .catch((error) => {
-        console.error("Error posting data: ", error);
-      });
+    if (commentText.trim().length) {
+      const currentTimestamp = new Date().toISOString();
+      axios
+        .post(`${backendUrl}api/newComment`, {
+          post_id: props.content.post_id,
+          user_id: props.userInfo.user_id,
+          content: commentText,
+          created_at: currentTimestamp,
+        })
+        .then((response) => {
+          const { message } = response.data;
+          console.log("Response from server:", message);
+          setCommentText("");
+          setCommentEmpty(false);
+        })
+        .catch((error) => {
+          console.error("Error posting data: ", error);
+        });
 
-    axios
-      .post(`${backendUrl}api/newNotification`, {
-        user_id: props.content.user_id,
-        content: `${props.userInfo.first_name} commented on your post!`,
-        created_at: currentTimestamp,
-        is_read: false,
-      })
-      .then((response) => {
-        const { message } = response.data;
-        console.log("Response from server:", message);
-      })
-      .catch((error) => {
-        console.error("Error posting data: ", error);
-      });
+      axios
+        .post(`${backendUrl}api/newNotification`, {
+          user_id: props.content.user_id,
+          content: `${props.userInfo.first_name} commented on your post!`,
+          created_at: currentTimestamp,
+          is_read: false,
+        })
+        .then((response) => {
+          const { message } = response.data;
+          console.log("Response from server:", message);
+        })
+        .catch((error) => {
+          console.error("Error posting data: ", error);
+        });
+    } else {
+      setCommentEmpty(true);
+      setCommentText("");
+    }
   };
   const handleLike = async () => {
     if (!liked) {
@@ -210,11 +222,25 @@ function Post(props) {
             </PopupState>
           </CardContent>
           <CardActions>
-            <TextField
-              variant="filled"
-              fullWidth
-              onChange={handleCommentText}
-            />
+            {!commentEmpty ? (
+              <TextField
+                variant="filled"
+                fullWidth
+                onChange={handleCommentText}
+                value={commentText}
+                onKeyDown={handleEnterKeyPress}
+              />
+            ) : (
+              <TextField
+                error
+                variant="filled"
+                fullWidth
+                onChange={handleCommentText}
+                value={commentText}
+                helperText="Comment cannot be empty"
+                onKeyDown={handleEnterKeyPress}
+              />
+            )}
             <Button size="small" onClick={handleNewComment}>
               Comment
             </Button>

@@ -32,8 +32,35 @@ function NotificationsPage() {
       });
   };
   useEffect(() => {
-    getNotifications();
+    getNotifications().then(setNotificationsAsRead);
   }, []);
+  const setNotificationsAsRead = async () => {
+    const anyUnread = await checkIfUnread(notifications);
+    console.log(anyUnread);
+    if (anyUnread) {
+      await axios
+        .put(`${backendUrl}api/setNotificationsAsRead`, {
+          user_id: userInfo,
+        })
+        .then((response) => {
+          const { message } = response.data;
+          console.log("Response from server:", message);
+        })
+        .catch((error) => {
+          console.error("Error posting data: ", error);
+        });
+    }
+  };
+  const checkIfUnread = (arr) => {
+    let result = false;
+    for (let i of arr) {
+      if (!i.is_read) {
+        result = true;
+        break;
+      }
+    }
+    return result;
+  };
   return (
     <>
       <AppBar />
